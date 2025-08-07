@@ -446,4 +446,6 @@ export type GetEndpointTypes<TClient, TPath extends string> =
           }
         : never
       : never
-    : never; 
+    : never;
+
+export * from './Provider';
