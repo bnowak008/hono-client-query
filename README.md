@@ -1,4 +1,4 @@
-# @scanpaigns/hono-query
+# hono-query-client
 
 A type-safe, React Query-powered client library for Hono applications. Automatically generates React hooks for your Hono API routes with full TypeScript support, intelligent cache management, and method-specific mutations.
 
@@ -16,11 +16,11 @@ A type-safe, React Query-powered client library for Hono applications. Automatic
 ## Installation
 
 ```bash
-npm install @scanpaigns/hono-query @tanstack/react-query hono
+npm install hono-query-client @tanstack/react-query hono
 # or
-yarn add @scanpaigns/hono-query @tanstack/react-query hono
+yarn add hono-query-client @tanstack/react-query hono
 # or
-pnpm add @scanpaigns/hono-query @tanstack/react-query hono
+pnpm add hono-query-client @tanstack/react-query hono
 ```
 
 ## Quick Start
@@ -29,7 +29,7 @@ pnpm add @scanpaigns/hono-query @tanstack/react-query hono
 
 ```tsx
 import { QueryClient } from '@tanstack/react-query';
-import { HonoQueryProvider } from '@scanpaigns/hono-query';
+import { HonoQueryProvider } from 'hono-query-client';
 import { hc } from 'hono/client';
 import type { AppType } from './server'; // Your Hono app type
 
@@ -48,7 +48,7 @@ function App() {
 ### 2. Create API Client
 
 ```tsx
-import { createHonoQueryProxy } from '@scanpaigns/hono-query';
+import { createHonoQueryProxy } from 'hono-query-client';
 import { hc } from 'hono/client';
 import type { AppType } from './server';
 
@@ -171,7 +171,7 @@ const {
 The library provides structured error handling:
 
 ```tsx
-import { HonoQueryError } from '@scanpaigns/hono-query';
+import { HonoQueryError } from 'hono-query-client';
 
 const mutation = api.users.post.useMutation({
   onError: (error) => {
@@ -193,7 +193,7 @@ Automatic cache invalidation happens based on endpoint patterns:
 You can also manually manage cache:
 
 ```tsx
-import { useHonoQueryContext } from '@scanpaigns/hono-query';
+import { useHonoQueryContext } from 'hono-query-client';
 
 function MyComponent() {
   const { utils } = useHonoQueryContext();
@@ -284,11 +284,18 @@ const updateUser = api.users[':id'].patch.useMutation({
 
 ### Type Exports
 
-- `ApiOutputs<TApp>` - All GET response types
-- `ApiInputs<TApp>` - All GET input types
-- `ApiMutationOutputs<TApp>` - All mutation response types
-- `ApiMutationInputs<TApp>` - All mutation input types
+- `HonoClient<TApp>` - The raw Hono client type
+- `ClientQueryOutput<TApp, ...>` - GET response types
+- `ClientQueryInput<TApp, ...>` - GET input types
+- `ClientMutationOutput<TApp, ...>` - Mutation response types
+- `ClientMutationInput<TApp, ...>` - Mutation input types
+- `GetQueryOutput<TClient, ...>` - Advanced GET response type
+- `GetQueryInput<TClient, ...>` - Advanced GET input type
+- `GetMutationOutput<TClient, ...>` - Advanced mutation response type
+- `GetMutationInput<TClient, ...>` - Advanced mutation input type
 - `HonoQueryError` - Error class for failed requests
+
+For a much better developer experience, see the [**Advanced Type-Safety Patterns**](./docs/TYPES.md) guide to avoid passing `TApp` in every type.
 
 ## Examples
 

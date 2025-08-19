@@ -1,0 +1,48 @@
+# Source files
+src/
+tsconfig.json
+bun.lock
+
+# Development files
+.git/
+.gitignore
+*.test.*
+*.spec.*
+__tests__/
+test/
+tests/
+
+# Documentation that shouldn't be in package
+docs/
+examples/
+.github/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Build artifacts that aren't needed
+*.tsbuildinfo 

@@ -1,17 +1,62 @@
 {
-  "name": "hono-client-query",
-  "version": "0.0.1",
-  "module": "src/index.ts",
+  "name": "hono-query-client",
+  "version": "0.0.2",
+  "description": "A type-safe, React Query-powered client library for Hono applications with automatic hook generation and intelligent cache management",
+  "keywords": ["hono", "react-query", "typescript", "react", "hooks", "api-client", "type-safe"],
+  "author": "Scanpaigns",
+  "license": "MIT",
+  "homepage": "https://github.com/bnowak008/hono-query-client#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bnowak008/hono-query-client.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bnowak008/hono-query-client/issues"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "module",
+  "scripts": {
+    "build": "bun run build:lib && bun run build:types",
+    "build:lib": "bun build src/index.ts --outdir dist --format esm --target node --minify && mv dist/index.js dist/index.mjs && bun build src/index.ts --outdir dist --format cjs --target node --minify",
+    "build:types": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "dev": "bun run build --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build",
+    "test": "bun test",
+    "lint": "tsc --noEmit",
+    "check": "bun run lint && bun run build"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "@types/react": "^18.2.0",
+    "typescript": "^5.3.0"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "@tanstack/react-query": "^5.0.0",
+    "hono": "^4.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "typescript": "^5.0.0"
   },
-  "dependencies": {
-    "@tanstack/react-query": "^5.84.1",
-    "@tanstack/react-query-devtools": "^5.84.1",
-    "hono": "^4.8.12"
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
